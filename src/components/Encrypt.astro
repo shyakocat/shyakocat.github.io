@@ -74,6 +74,9 @@ const encryptedHtml = await encrypt(html, Astro.props.password);
         const btn = document.getElementById("password-btn");
         const article = document.querySelector("#article");
 
+        if (!btn) return;
+        if (btn._haveHandler) return;
+        btn._haveHandler = true;
         btn?.addEventListener("click", async () => {
             const password = input.value;
             try {
