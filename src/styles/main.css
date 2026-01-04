@@ -150,3 +150,31 @@
     }
   }
 }
+
+/* giscus-widget::part(iframe) {
+  min-height: 369px;
+} */
+
+.image-caption {
+    inline-size: fit-content;
+    margin-inline: auto;
+}
+
+.image-caption > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-caption > div figure {
+    justify-items: center;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+
+.image-caption > div figcaption {
+    overflow-wrap: break-word;
+    inline-size: 0;
+    min-inline-size: fit-content;
+    margin-inline: auto;
+}

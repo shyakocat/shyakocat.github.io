@@ -4,7 +4,8 @@ published: 2023-10-01
 description: A simple example of a Markdown blog post.
 tags: [Markdown, Blogging, Demo]
 category: Examples
-draft: false
+draft: true
+password: "123"
 ---
 
 # An h1 header

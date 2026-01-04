@@ -4,6 +4,8 @@ import type {
 	NavBarConfig,
 	ProfileConfig,
 	SiteConfig,
+	UmamiConfig,
+	UmamiStatsConfig,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
 
@@ -53,7 +55,7 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "assets/images/demo-avatar.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+	avatar: "assets/images/fll.jpeg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "shyakocat",
 	bio: "The niece of time.",
 	links: [
