@@ -14,7 +14,8 @@ import PostMetadata from "../../components/PostMeta.astro";
 import { profileConfig, siteConfig } from "../../config";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
 
-import Comments from "@components/Comment.tsx";
+// import Comments from "@components/Comment.tsx";
+import Comment from "@components/Comment.svelte";
 import PasswordWrapper from "@components/PasswordWrapper.astro";
 
 export async function getStaticPaths() {
@@ -174,7 +175,8 @@ const jsonLd = {
                 </PasswordWrapper>
             </article>
 
-            <Comments client:only="react" />
+            <!-- <Comments client:only="react" /> -->
+            <Comment client:only="svelte"></Comment>
         </div>
     </div>
 

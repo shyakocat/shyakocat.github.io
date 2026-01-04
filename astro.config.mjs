@@ -24,7 +24,6 @@ import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
-import react from "@astrojs/react";
 import { rehypeImageCaption } from "./src/plugins/rehype-image.mjs";
 
 // https://astro.build/config
@@ -98,7 +97,7 @@ export default defineConfig({
         frames: {
             showCopyToClipboardButton: false,
         },
-		}), svelte(), sitemap(), react()],
+		}), svelte(), sitemap()],
     markdown: {
         remarkPlugins: [
             remarkMath,
