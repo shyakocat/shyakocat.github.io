@@ -42,11 +42,23 @@ function loadGiscus(theme) {
   container.appendChild(script)
 }
 
+let lastTheme = null
+
 function updateGiscusTheme() {
   const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+  // If effective theme didn't change, don't touch the iframe
+  if (theme === lastTheme) return
+
   const iframe = document.querySelector('iframe.giscus-frame')
-  if (!iframe?.contentWindow) return
-  iframe.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app')
+  if (iframe?.contentWindow) {
+    iframe.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app')
+    lastTheme = theme
+    return
+  }
+
+  // If iframe is not ready, reload giscus with the desired theme
+  loadGiscus(theme)
+  lastTheme = theme
 }
 
 onMount(() => {
@@ -57,12 +69,16 @@ onMount(() => {
 
   const initialTheme = resolveThemeValue(stored)
   loadGiscus(initialTheme)
+  // remember applied theme to avoid unnecessary toggles
+  lastTheme = initialTheme
 
   // react to system changes when in AUTO_MODE
   if (window.matchMedia) {
     mql = window.matchMedia('(prefers-color-scheme: dark)')
+    // Use getStoredTheme() at the time of system change so we react correctly
+    // even if theme was changed elsewhere (e.g. from AUTO to LIGHT/DARK).
     sysListener = () => {
-      if (currentMode === AUTO_MODE) updateGiscusTheme()
+      if (getStoredTheme() === AUTO_MODE) updateGiscusTheme()
     }
     if (mql.addEventListener) mql.addEventListener('change', sysListener)
     else mql.addListener(sysListener)
