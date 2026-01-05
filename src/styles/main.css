@@ -157,13 +157,17 @@
 
 .image-caption {
     inline-size: fit-content;
+    justify-content: center;
+    align-items: center;
     margin-inline: auto;
+    text-align: center;
 }
 
 .image-caption > div {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    text-align: center;
 }
 
 .image-caption > div figure {
@@ -177,4 +181,19 @@
     inline-size: 0;
     min-inline-size: fit-content;
     margin-inline: auto;
+}
+
+.image-caption > div img {
+    min-width: 86vw;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* 平板以上 */
+@media (min-width: 768px) {
+    .image-caption > div img {
+        min-width: auto;
+        max-width: auto;
+        margin: 0 auto;
+    }
 }

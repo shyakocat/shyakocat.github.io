@@ -6,7 +6,7 @@ image: ''
 tags: [抖音, 安卓, 反编译, MT管理器, Java, 签名, jadx-gui]
 category: '技术'
 draft: false 
-password: 'douyin_ee82'
+password: douyin_fc4d
 ---
 
 # 背景
@@ -75,7 +75,7 @@ password: 'douyin_ee82'
 
 |版本|称呼|特点|
 |-----|-----|-----|
-|<div style="width: 40px">V1</div>|<div style="width: 200px">基于 JAR 签名</div>|最老版本。它只校验 APK 里的单个文件。缺点是安装慢，且可以被通过某些手段修改 APK 结构（不改文件内容）来绕过。|
+|<div style="width: 30px">V1</div>|<div style="width: 175px">基于 JAR 签名</div>|最老版本。它只校验 APK 里的单个文件。缺点是安装慢，且可以被通过某些手段修改 APK 结构（不改文件内容）来绕过。|
 |V2|全栈签名 (Android 7.0+)|主流标准。它不再校验单个文件，而是校验整个 APK 文件块。由于不需要解压再校验，安装速度极大提升。|
 |V3|签名轮转 (Android 9.0+)|进阶版。它允许开发者更换签名密钥的同时，依然保持与旧版的关联。解决“开发者想换密钥但不想让用户丢数据”的问题。|
 |V4|流式传输签名 (Android 11+)|辅助版。主要配合 ADB 增量安装使用，减少大型游戏（如原神）的安装等待时间。|

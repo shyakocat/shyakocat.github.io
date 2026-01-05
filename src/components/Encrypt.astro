@@ -83,7 +83,7 @@ const encryptedHtml = await encrypt(html, Astro.props.password);
                 const html = await decrypt(encrypted, password);
                 article.innerHTML = html;
             } catch (e) {
-                alert("Incorrect password");
+                alert("Incorrect password or not using HTTPS.");
             }
         });
     }
