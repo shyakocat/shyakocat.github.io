@@ -2,7 +2,7 @@
 title: 抖音36.8.0模块版的反编译修复
 published: 2026-01-04
 description: '记录了一次安卓反编译过程。仅供技术学习，禁止传播与使用'
-image: ''
+image: './139591860_p0.jpg'
 tags: [抖音, 安卓, 反编译, MT管理器, Java, 签名, jadx-gui]
 category: '技术'
 draft: false 

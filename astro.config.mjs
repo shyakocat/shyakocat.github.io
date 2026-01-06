@@ -25,6 +25,7 @@ import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
 import { rehypeImageCaption } from "./src/plugins/rehype-image.mjs";
+import rehypeFootnoteI18n from "./src/plugins/rehype-footnote-i18n.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -148,6 +149,7 @@ export default defineConfig({
                 },
             ],
             rehypeImageCaption,
+            rehypeFootnoteI18n,
         ],
     },
     vite: {
