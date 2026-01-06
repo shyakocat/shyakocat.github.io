@@ -6,7 +6,7 @@ image: '130961892_p0.png'
 tags: [clash, openclash, 3proxy, Wi-Fi]
 category: '技术'
 draft: false 
-#password: clash_13f9
+password: clash_13f9
 ---
 
 # 背景
