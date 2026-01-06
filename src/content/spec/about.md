@@ -1,10 +1,12 @@
-# About
+# 关于
 
 ## 博客框架
 
 使用[Fuwari](https://github.com/saicaca/fuwari)搭建的博客。
 
 ::github{repo="saicaca/fuwari"}
+
+还有一些功能代码参考了[伊卡](https://ikamusume7.org)的博客，好可爱。
 
 ## 名字由来
 
