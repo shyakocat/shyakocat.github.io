@@ -90,6 +90,8 @@ MT 会自动修改应用的 classes.dex 代码，通过 Hook（钩子）技术�
 
 # 修复过程
 
+## Log定位
+
 首先我们得定位问题在哪，也就是用
 
 ```shell
@@ -123,10 +125,14 @@ java.lang.NoSuchFieldError: com.ss.android.ugc.aweme.feed.model.Video#playAddr
 此时我们发现，注入逻辑中的类名是特殊字符，而且很多名字被做r8混淆了，主要的报错意思是找不到`playAddr`这个字段。
 那么一个显然的猜测就是，在抖音更新的过程中，这个字段被修改了。
 
+## 字段搜索
+
 ![ c-让我来搜一搜字段 w-90%](./search.png "")
 ![ c-你为什么要给public成员加下划线 w-90%](./_field.png "")
 
 用jadx-gui反编译整个apk，获取java源码。通过观察可知，`com.ss.android.ugc.aweme.feed.model.Video`类下的字段被改成了`_playAddr`。那么我们的目标就很简单了，假设只有这一个错误，那么只需要修复这个字段找不到的问题即可。
+
+## 溯源注入
 
 然后下一步就是找到注入逻辑的代码在哪，很可惜，我没有找到。根据和历史官方版本的对比，我们发现模块版多出了`classes58.dex`和`classes59.dex`这两个文件。然后根据其中的代码，发现一段`androidx/app/Init`下的逻辑：
 
@@ -192,6 +198,8 @@ public class Init {
 ```
 
 也就是说，有可能注入逻辑被藏在了`assets/hkp/loader.dex`或者`libhkp.so`这个arm库中了（笔者是armv8a）。很可惜，我在`loader.dex`中没发现`playAddr`字样，同时也猜测它只是一个导入用的壳，实际的逻辑可能还隐匿在其它地方。而动态库的反编译相比Smali（Android下Dalvik虚拟机支持的字节码的可读版）过于复杂，我看不下去。
+
+## Smali替换
 
 但是我们可以另辟蹊径，既然修改模块逻辑不行，我们可以直接修改抖音本体的逻辑。一开始我给`Video`类加了一个字段`playAddr`，并且让七十多处对`_playAddr`的赋值逻辑同时也给`playAddr`赋值，这样同步后，`playAddr`相当于是`_playAddr`的马甲了，于是就可以读到值了，抖音也不闪退了。但是这样有一个问题，只有主页的视频可以下载，而搜索页、收藏页等视频下载会报错。这就奇怪了，到底哪里没赋值呢，这边我又作出一个猜测，即其它页面的视频是通过GSON序列化过来的，于是不会给playAddr赋值。那么又有一个简单的想法，我把代码中所有`_playAddr`替换成`playAddr`那不就行了吗（虽然还有`_playAddrH265`，但也不影响）。果然，这样替换很简单，在MT管理器中用Dex++编辑器一键就能做到，而且也不再有问题了。
 ![ c-所以手机上一键替换就行 w-40%](./replace.jpg "")

@@ -47,7 +47,7 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Archive,
 		LinkPreset.About,
 		{
-			name: "外链",
+			name: "博客框架",
 			url: "https://github.com/saicaca/fuwari", // Internal links should not include the base path, as it is automatically added
 			external: true, // Show an external link icon and will open in a new tab
 		},
@@ -76,6 +76,11 @@ export const profileConfig: ProfileConfig = {
 			icon: "fa6-brands:github",
 			url: "https://github.com/shyakocat",
 		},
+		{
+			name: "RSS",
+			icon: "fa6-solid:rss",
+			url: "/rss.xml",
+		}
 	],
 };
 
