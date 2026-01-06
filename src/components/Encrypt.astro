@@ -11,7 +11,7 @@ const encryptedHtml = await encrypt(html, Astro.props.password);
 
 <meta name="encrypted" content={encryptedHtml} />
 
-<div class="flex items-center justify-center gap-2 mb-4">
+<form id="decrypt-form" class="flex items-center justify-center gap-2 mb-4">
     <input
         id="password"
         class="w-auto rounded border border-[var(--line-color)] border-opacity-40 bg-[var(--card-bg)] p-2 text-[var(--deep-text)]
@@ -29,12 +29,12 @@ const encryptedHtml = await encrypt(html, Astro.props.password);
                 border border-[var(--line-color)] border-opacity-50 p-2
                 text-[var(--btn-content)]
                 hover:bg-[var(--enter-btn-bg-hover)] hover:border-[var(--primary)] transition"
-        type="button"
+        type="submit"
         aria-label="Decrypt article"
     >
         解密文章
     </button>
-</div>
+</form>
 
 <script is:inline data-astro-rerun>
     async function decrypt(data, key) {
@@ -73,13 +73,14 @@ const encryptedHtml = await encrypt(html, Astro.props.password);
             .querySelector("meta[name=encrypted]")
             ?.getAttribute("content");
         const input = document.getElementById("password");
-        const btn = document.getElementById("password-btn");
+        const form = document.getElementById("decrypt-form");
         const article = document.querySelector("#article");
 
-        if (!btn) return;
-        if (btn._haveHandler) return;
-        btn._haveHandler = true;
-        btn?.addEventListener("click", async () => {
+        if (!form) return;
+        if (form._haveHandler) return;
+        form._haveHandler = true;
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
             const password = input.value;
             try {
                 const html = await decrypt(encrypted, password);
