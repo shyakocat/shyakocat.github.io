@@ -4,8 +4,9 @@ import type {
 	NavBarConfig,
 	ProfileConfig,
 	SiteConfig,
-	UmamiConfig,
-	UmamiStatsConfig,
+	// UmamiConfig,
+	// UmamiStatsConfig,
+	FriendLink,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
 
@@ -46,11 +47,12 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Home,
 		LinkPreset.Archive,
 		LinkPreset.About,
-		{
-			name: "博客框架",
-			url: "https://github.com/saicaca/fuwari", // Internal links should not include the base path, as it is automatically added
-			external: true, // Show an external link icon and will open in a new tab
-		},
+		LinkPreset.Friends,
+		// {
+		// 	name: "友链",
+		// 	url: "/links/", // Internal links should not include the base path, as it is automatically added
+		// 	external: false, // Show an external link icon and will open in a new tab
+		// },
 	],
 };
 
@@ -95,3 +97,13 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 	// Please select a dark theme, as this blog theme currently only supports dark background color
 	theme: "github-dark",
 };
+
+
+export const friendLinks: FriendLink[] = [
+  {
+    name: "buaa-shy",
+    url: "https://www.cnblogs.com/buaa-shy",
+    description: "螃蟹在剥我的壳，笔记本在写我，漫天的我落在枫叶上雪花上，而你在想我",
+    avatar: "/20200330201449_bktsj.jpg",
+  },
+];
