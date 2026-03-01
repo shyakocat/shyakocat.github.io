@@ -177,6 +177,35 @@ rules:
 
 ![ c=OpenClash的UI界面](./openclash.png "")
 
+## 我已是完全之Clash
+
+之前一直有一些问题困扰着我，现在更新新的客户端（v0.47.055）和内核（	alpha-9033717）后，解决了这些问题。或许部分卡顿问题，也被一并带走了。
+
+[OpenClash](https://github.com/vernesong/OpenClash)客户端之前总是反应很慢，新的就好不少了。新界面也不一样了。
+
+[mihomo内核](https://github.com/MetaCubeX/mihomo/releases)之前TUN模式总是不管用。只能用增强模式。而混合模式=TCP用增强+UDP用TUN，如果TUN用不了就会导致UDP走不通，所以混合模式会出现网页能打开但是原神不能玩的情况。而最近我又有一个新的需求，也就是路由器上的ZeroTier，我们知道手机上开Clash或ZeroTier会占用系统VPN，而VPN只能有一个，虽然可以路由用Clash手机用ZeroTier解决，但是我们为什么不把ZeroTier也放到路由器里解决呢。此时就碰到了上述问题，ZeroTier要走UDP，而增强模式和TUN模式都不行。通过一些命令
+
+```shell
+ip route show
+ip rule show
+ip link show | grep tun
+```
+
+发现它返回的路由表竟然没有走TUN的规则，但是TUN是被开启而且UP了的，一开始还以为是被kwman或者一些其它守护进程覆写掉了，但其实这个就是内核的问题，换新的就好了。
+
+安装OpenClash:
+```shell
+opkg install luci-app-openclash_0.47.055_all.ipk
+```
+
+替换内核并赋予执行权限:
+```shell
+gzip -d mihomo-linux-arm64-alpha-9033717.gz
+mv <解压出来的内核> /etc/openclash/core/clash_meta
+chmod +x clash_meta
+```
+
+
 # 总结
 
 当某校学子登上一座山后，发现其他高校的学生早就坐在山顶了。
